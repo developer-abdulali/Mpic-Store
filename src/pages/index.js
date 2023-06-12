@@ -1,22 +1,32 @@
-import { Inter } from 'next/font/google'
+ import React from 'react'
 import { stripe } from 'src/utils/stripe'
-const inter = Inter({ subsets: ['latin'] })
+ 
+ export default function index({products}) {
+  console.log(products)
 
-export default function Home({products}) {
-  // console.log(products)
-  return (
-    <div className=''>home</div>
-  )
-}
-
+   return (
+     <div>home</div>
+   )
+ }
+ 
 export async function getStaticProps(){
-
   const inventory = await stripe.products.list({
+    expand: ["data.default_price"],
     limit: 8,
+  })
+  const products = inventory.data.map(product => {
+    const price = product.default_price
+    return{
+      currency: price.currency,
+      id: product.id,
+      name: product.name,
+      price: price.unit_amount,
+      image: product.images[0]
+    }
   })
   return{
     props:{
-      products: inventory
+      products,
     }
   }
 }
