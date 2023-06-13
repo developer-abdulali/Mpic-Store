@@ -14,7 +14,7 @@ export default function Ratings() {
       {Array.from({ length: 1 }).map((_, index) => (
         <EmptyStarIcon
           key={index}
-          className="w-5 h-5 flex flex-shrink-0 text-yellow-400"
+          className="w-6 h-6 flex flex-shrink-0 text-yellow-400"
         />
       ))}
     </div>

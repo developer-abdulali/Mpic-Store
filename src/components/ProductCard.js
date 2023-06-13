@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import Ratings from "src/components/Ratings";
+import { formatCurrencyString } from 'use-shopping-cart/core'
+
 
 export default function ProductCard({ product, index }) {
   return (
@@ -10,16 +12,19 @@ export default function ProductCard({ product, index }) {
       className="border-2 rounded-md group overflow-hidden"
     >
       <div className="relative w-full h-64">
-        {product.image && <Image priority={index === 1} src={product.image} alt={product.name} fill sizes="100%" />}
+        {product.image && <Image priority={index === 1} src={product.image} alt={product.name} fill sizes="100%" />} 
       </div>
-
+ 
       <div className="p-6 bg-white">
         <p className="font-semibold text-lg">{product.name}</p>
         <Ratings />
         <div className="mt-4 flex items-center justify-between space-x-2">
             <div>
                 <p className="text-gray-500">Price</p>
-                <p className="text-lg font-semibold">{product.price}</p>
+                <p className="text-lg font-semibold">{formatCurrencyString({
+                  currency: product.currency,
+                  value: product.price
+                })}</p>
             </div>
             <button className="border rounded-lg py-1 px-4">
                 Add to Cart
