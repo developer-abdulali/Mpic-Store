@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import Ratings from "./ratings";
+import Ratings from "src/components/Ratings";
 
 export default function ProductCard({ product, index }) {
   return (
