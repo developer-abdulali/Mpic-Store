@@ -2,10 +2,15 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import Ratings from "src/components/Ratings";
-import { formatCurrencyString } from 'use-shopping-cart/core'
+import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
 
 
 export default function ProductCard({ product, index }) {
+  const { addItem } = useShoppingCart();
+  function onAddToCart(event){
+    event.preventDefault
+    addItem(product)
+  }
   return (
     <Link 
       href={`/products/${product.id}`}
@@ -26,7 +31,7 @@ export default function ProductCard({ product, index }) {
                   value: product.price
                 })}</p>
             </div>
-            <button className="border rounded-lg py-1 px-4">
+            <button onClick={onAddToCart} className="border rounded-lg py-1 px-4">
                 Add to Cart
             </button>
         </div>
