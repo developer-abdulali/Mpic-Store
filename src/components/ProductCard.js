@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import Ratings from "./ratings";
 
 export default function ProductCard({ product, index }) {
   return (
@@ -14,6 +15,7 @@ export default function ProductCard({ product, index }) {
 
       <div className="p-6 bg-white">
         <p className="font-semibold text-lg">{product.name}</p>
+        <Ratings />
         <div className="mt-4 flex items-center justify-between space-x-2">
             <div>
                 <p className="text-gray-500">Price</p>
