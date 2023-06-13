@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: ['http://localhost:3000/']
-  },
+  // images: {
+  //   domains: ['epic-projects.nyc3.digitaloceanspaces.com']
+  // },
 }
 
 module.exports = nextConfig
