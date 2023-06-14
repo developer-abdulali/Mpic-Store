@@ -1,11 +1,29 @@
 import { stripe } from "src/utils/stripe"
-
+import Image from "next/image"
 export default function ProductPage({products}) {
     console.log(products)
   return (
-    <div>ProductPage</div>
+    <div className="container lg:max-w-screen-lg mx-auto py-12 px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96">
+                <Image src={products.image} alt={products.name} fill style={{objectFit:"contain"}} sizes="100%" priority />
+            </div>
+            <div className="w-full flex-1 max-w-md border border-opacity-50 rounded-md shadow-lg p-6 bg-white">
+                <h2 className="text-3xl font-semibold">{products.name}</h2>
+            </div>
+        </div>
+    </div>
   )
 }
+
+
+
+
+
+
+
+
+
 
 export async function getStaticPaths(){
     const inventory = await stripe.products.list()
@@ -17,7 +35,7 @@ export async function getStaticPaths(){
         paths,
         fallback: "blocking"
     }
-
+    
 }
 
 export async function getStaticProps({params}){
@@ -42,9 +60,9 @@ export async function getStaticProps({params}){
     return{
         props: {
             products,
-        }
-    }
-
+        },
+        revalidate: 60 * 60
+    };
 }
 
 
