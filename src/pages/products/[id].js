@@ -2,7 +2,7 @@ import { stripe } from "src/utils/stripe";
 import Image from "next/image";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { formatCurrencyString } from "use-shopping-cart";
-import { MinusSmallIcon } from "@heroicons/react/24/solid";
+import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/solid";
 
 export default function ProductPage({ product }) {
   console.log(product);
@@ -40,8 +40,15 @@ export default function ProductPage({ product }) {
                 <button className="p-1 rounded-md hover:bg-rose-100 hover:text-rose-500">
                     <MinusSmallIcon className="w-6 h-6 flex-shrink-0" />
                 </button>
+                <p className="font-semibold text-xl">0</p>
+                <button className="p-1 rounded-md hover:bg-green-100 hover:text-green-500">
+                    <PlusSmallIcon className="w-6 h-6 flex-shrink-0" />
+                </button>
             </div>
           </div>
+          <button className="w-full mt-4 border border-lime-500 py-2 px-6 bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-line-500 text-white disabled:opacity-50 disabled:cursor-not-allowed">
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
