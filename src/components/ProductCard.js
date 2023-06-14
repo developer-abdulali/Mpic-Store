@@ -1,15 +1,18 @@
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
 import Ratings from "src/components/Ratings";
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
+import { toast } from "react-hot-toast";
 
 
 export default function ProductCard({ product, index }) {
-  const { addItem } = useShoppingCart();
+  const { addItem } = useShoppingCart()
+
   function onAddToCart(event){
-    event.preventDefault
+    event.preventDefault();
+    const id = toast.loading("Adding 1 item...")
     addItem(product)
+    toast.success(`${product.name} added`, {id})
   }
   return (
     <Link 

@@ -11,8 +11,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
                 currency: product.currency,
                 unit_amount_decimal: product.price
             },
-            images: [product.images]
+            images: [product.image]
         });
-        // console.log(stripeProduct.name, ":", stripeProduct.id)
     }
 })()
