@@ -16,7 +16,6 @@ export default function index({ products }) {
 export async function getStaticProps() {
   const inventory = await stripe.products.list({
     expand: ["data.default_price"],
-    limit: 8,
   });
 
   const products = inventory.data.map((product) => {

@@ -9,7 +9,6 @@ export default function ProductCard({ product, index }) {
   const { addItem } = useShoppingCart()
 
   function onAddToCart(event){
-    event.preventDefault();
     const id = toast.loading("Adding 1 item...")
     addItem(product)
     toast.success(`${product.name} added`, {id})
