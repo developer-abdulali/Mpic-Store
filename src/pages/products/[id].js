@@ -1,6 +1,8 @@
 import { stripe } from "src/utils/stripe";
 import Image from "next/image";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import { formatCurrencyString } from "use-shopping-cart";
+import { MinusSmallIcon } from "@heroicons/react/24/solid";
 
 export default function ProductPage({ product }) {
   console.log(product);
@@ -20,8 +22,26 @@ export default function ProductPage({ product }) {
         <div className="w-full flex-1 max-w-md border border-opacity-50 rounded-md shadow-lg p-6 bg-white">
           <h2 className="text-3xl font-semibold">{product.name}</h2>
           <p className="pt-2 flex items-center space-x-2">
-            <CheckIcon className="text-lime-500" />
+            <CheckIcon className="text-lime-500 w-5 h-5" />
+            <span className="font-semibold">In stock</span>
           </p>
+          <div className="mt-4 border-t pt-4">
+            <p className="text-gray-500">Price:</p>
+            <p className="text-xl font-semibold">
+                {formatCurrencyString({
+                    value: product.price,
+                    currency: product.currency
+                })}
+            </p>
+          </div>
+          <div className="mt-4 border-t pt-4">
+            <p className="text-gray-500">Quantity:</p>
+            <div className="mt-1 flex items-center space-x-3">
+                <button className="p-1 rounded-md hover:bg-rose-100 hover:text-rose-500">
+                    <MinusSmallIcon className="w-6 h-6 flex-shrink-0" />
+                </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
