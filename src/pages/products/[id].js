@@ -1,7 +1,7 @@
 import { stripe } from "src/utils/stripe"
 
-export default function ProductPage({product}) {
-    console.log(product)
+export default function ProductPage({products}) {
+    console.log(products)
   return (
     <div>ProductPage</div>
   )
@@ -9,8 +9,8 @@ export default function ProductPage({product}) {
 
 export async function getStaticPaths(){
     const inventory = await stripe.products.list()
-    const paths = inventory.data.map((products) => ({
-        params: {id: products.id}
+    const paths = inventory.data.map((product) => ({
+        params: {id: product.id}
     }))
 
     return{
