@@ -1,12 +1,22 @@
 import { stripe } from "src/utils/stripe";
 import Image from "next/image";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { formatCurrencyString } from "use-shopping-cart";
+import { formatCurrencyString, useShoppingCart } from "use-shopping-cart";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function ProductPage({ product }) {
   const [count, setCount] = useState(1)
+  const {addItem} = useShoppingCart()
+
+  function onAddToCart(event){
+    const id = toast.loading(`Adding ${count} item${count > 1 ? "s" : ""}`)
+    addItem(product, {count})
+    toast.success(`${count} ${product.name} added`, {id})
+  }
+  
+
   return (
     <div className="container lg:max-w-screen-lg mx-auto py-12 px-6">
       <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12">
@@ -47,7 +57,7 @@ export default function ProductPage({ product }) {
                 </button>
             </div>
           </div>
-          <button className="w-full mt-4 border border-lime-500 py-2 px-6 bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-lime-500 text-white disabled:opacity-50 disabled:cursor-not-allowed rounded-md">
+          <button onClick={onAddToCart} className="w-full mt-4 border border-lime-500 py-2 px-6 bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-lime-500 text-white disabled:opacity-50 disabled:cursor-not-allowed rounded-md">
             Add to Cart
           </button>
         </div>
