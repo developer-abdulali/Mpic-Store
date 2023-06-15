@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useShoppingCart } from "use-shopping-cart"
+import CartProduct from "src/components/CartProduct"
 
 export default function cart() {
     const {cartCount, cartDetails, formattedTotalPrice, clearCart } = useShoppingCart()
@@ -29,6 +30,9 @@ export default function cart() {
     )}
 
     {cartCount > 0 && <div className="mt-12 space-y-4">
+      {Object.entries(cartDetails).map(([productId, product]) => (
+          <CartProduct key={productId}  product={product}/>
+      ))}
         
     <div className="flex flex-col items-end border-t py-4 mt-8">
         <p className="text-xl">Total: {" "}
