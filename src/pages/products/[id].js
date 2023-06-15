@@ -3,9 +3,10 @@ import Image from "next/image";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { formatCurrencyString } from "use-shopping-cart";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 
 export default function ProductPage({ product }) {
-  console.log(product);
+  const [count, setCount] = useState(1)
   return (
     <div className="container lg:max-w-screen-lg mx-auto py-12 px-6">
       <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12">
@@ -37,16 +38,16 @@ export default function ProductPage({ product }) {
           <div className="mt-4 border-t pt-4">
             <p className="text-gray-500">Quantity:</p>
             <div className="mt-1 flex items-center space-x-3">
-                <button className="p-1 rounded-md hover:bg-rose-100 hover:text-rose-500">
+                <button disabled={count <= 1} onClick={()=> setCount(count - 1)} className="p-1 rounded-md hover:bg-rose-100 hover:text-rose-500">
                     <MinusSmallIcon className="w-6 h-6 flex-shrink-0" />
                 </button>
-                <p className="font-semibold text-xl">0</p>
-                <button className="p-1 rounded-md hover:bg-green-100 hover:text-green-500">
+                <p className="font-semibold text-xl">{count}</p>
+                <button onClick={()=> setCount(count + 1)} className="p-1 rounded-md hover:bg-green-100 hover:text-green-500">
                     <PlusSmallIcon className="w-6 h-6 flex-shrink-0" />
                 </button>
             </div>
           </div>
-          <button className="w-full mt-4 border border-lime-500 py-2 px-6 bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-line-500 text-white disabled:opacity-50 disabled:cursor-not-allowed">
+          <button className="w-full mt-4 border border-lime-500 py-2 px-6 bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-lime-500 text-white disabled:opacity-50 disabled:cursor-not-allowed rounded-md">
             Add to Cart
           </button>
         </div>
