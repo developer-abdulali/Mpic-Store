@@ -33,7 +33,7 @@ export default function ProductCard({ product, index }) {
                   value: product.price
                 })}</p>
             </div>
-            <button onClick={onAddToCart} className="border rounded-lg py-1 px-4">
+            <button onClick={onAddToCart} className="border rounded-lg py-1 px-4 mt-4border-lime-500  bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:ring-opacity-50 focus:ring-lime-500 text-white">
                 Add to Cart
             </button>
         </div>
