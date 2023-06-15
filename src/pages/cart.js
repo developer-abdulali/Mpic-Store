@@ -2,7 +2,7 @@ import Link from "next/link"
 import { useShoppingCart } from "use-shopping-cart"
 
 export default function cart() {
-    const {cartCount, clearCart } = useShoppingCart()
+    const {cartCount, formattedTotalPrice, clearCart } = useShoppingCart()
   return (
     <div className="container xl:max-w-screen-xl mx-auto py-12 px-6">
     {cartCount > 0 ? (
@@ -27,6 +27,15 @@ export default function cart() {
         </>
     )}
 
+    {cartCount > 0 && <div className="mt-12 space-y-4">
+        
+    <div className="flex flex-col items-end border-t py-4 mt-8">
+        <p className="text-xl">Total:
+        <span className="font-semibold">{formattedTotalPrice}</span>
+        </p>
+    </div>
+
+    </div>}
     </div>
   )
 }
