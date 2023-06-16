@@ -8,7 +8,7 @@ import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import { useShoppingCart } from "use-shopping-cart";
 
 export default function CartProduct({ product }) {
-  const {setItemQuantity} = useShoppingCart()
+  const {setItemQuantity, removeItem } = useShoppingCart()
   return (
     <div className="flex justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-4 bg-white">
       <Link
@@ -49,6 +49,7 @@ export default function CartProduct({ product }) {
         </p>
         <button className="ml-4 hover:text-red-500">
           <svg
+            onClick={()=> removeItem(product.id)}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
