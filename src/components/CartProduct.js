@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MinusSmallIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  MinusSmallIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
- 
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function CartProduct({ product }) {
-    const [count, setCount] = useState(1)
+  const {setItemQuantity} = useShoppingCart()
   return (
     <div className="flex justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-4 bg-white">
       <Link
@@ -21,7 +23,9 @@ export default function CartProduct({ product }) {
             style={{ objectFit: "contain" }}
           />
         </div>
-        <p className="font-semibold text-xl group-hover:underline">{product.name}</p>
+        <p className="font-semibold text-xl group-hover:underline">
+          {product.name}
+        </p>
       </Link>
       <div className="flex items-center">
         <div className="flex items-center space-x-3">
@@ -29,19 +33,35 @@ export default function CartProduct({ product }) {
             disabled={product.quantity <= 1}
             className="p-1 rounded-md hover:bg-rose-100 hover:text-rose-500"
           >
-            <MinusSmallIcon onClick={() => setCount(count + 1) } className="w-6 h-6 flex-shrink-0" />
+            <MinusSmallIcon
+             onClick={()=> setItemQuantity(product.id, product.quantity - 1)}
+              className="w-6 h-6 flex-shrink-0"
+            />
           </button>
           <p className="font-semibold text-xl">{product.quantity}</p>
-          <button className="p-1 rounded-md hover:bg-green-100 hover:text-green-500">
+          <button onClick={()=> setItemQuantity(product.id, product.quantity + 1)} className="p-1 rounded-md hover:bg-green-100 hover:text-green-500">
             <PlusSmallIcon className="w-6 h-6 flex-shrink-0" />
           </button>
         </div>
         <p className="font-semibold text-xl ml-16">
-            <XMarkIcon className="hidden w-4 h-4 text-gray-500 sm:inline-block mr-4 mb-1" />
-            {product.formattedPrice}
+          <XMarkIcon className="hidden w-4 h-4 text-gray-500 sm:inline-block mr-4 mb-1" />
+          {product.formattedPrice}
         </p>
         <button className="ml-4 hover:text-red-500">
-            <XCircleIcon className="w-6 h-6 flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
         </button>
       </div>
     </div>
