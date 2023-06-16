@@ -1,6 +1,14 @@
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import axios from "axios"
+import { useRouter } from "next/router"
+import useSWR from "swr"
 
 export default function success() {
+    const router = useRouter()
+    const sessionId = router.query.session_id
+    const stuff = useSWR(`/api/checkout-sessions/${sessionId}`,url => axios.get(url).then
+    (res=> res.data))
+    console.log(stuff)
     const data = true
     const error = false
   return (

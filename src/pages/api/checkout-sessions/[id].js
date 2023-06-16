@@ -3,6 +3,7 @@ import { stripe } from "src/utils/stripe";
 import React from 'react'
 
 export default async function handler(req, res) {
+    
     if(req.method === "POST"){
     const id = req.query.id
     try {
