@@ -1,10 +1,9 @@
 import { stripe } from "src/utils/stripe";
 
-import React from 'react'
 
 export default async function handler(req, res) {
     
-    if(req.method === "POST"){
+    if(req.method === "GET"){
     const id = req.query.id
     try {
         if(!id.startsWith("cs_")){
